@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.is2.fitness.R;
 
-public class OtrosFragment extends Fragment{
+public class InicioFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_otros, container, false);
+        View view = inflater.inflate(R.layout.fragment_inicio, container, false);
 
         // Ubicar argumento en el text view de section_fragment.xml
         //String title = getArguments().getString(ARG_SECTION_TITLE);

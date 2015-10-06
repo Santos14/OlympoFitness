@@ -12,8 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.is2.fitness.R;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             //selectItem(drawerTitle);
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction transaction = fm.beginTransaction();
-            HomeFragment home = new HomeFragment();
+            InicioFragment home = new InicioFragment();
             transaction.add(R.id.main_content,home).commit();
             drawerLayout.closeDrawers();
         }
@@ -69,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // Marcar item presionado
-                        //menuItem.setChecked(true);
-                        // Crear nuevo fragmento
-                        //String title = menuItem.getTitle().toString();
                         selectItem(menuItem);
                         return true;
                     }
@@ -101,39 +96,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(MenuItem menuItem) {//String title
-        // Enviar título como arguemento del fragmento
-        //Bundle args = new Bundle();
-        //args.putString(PlaceholderFragment.ARG_SECTION_TITLE, title);
 
-        //Fragment fragment = PlaceholderFragment.newInstance(title);
-        //fragment.setArguments(args);
         boolean enviarFragmento = false;
         Fragment newFragment = null;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         switch (menuItem.getItemId()){
             case R.id.nav_home:
-                newFragment = new HomeFragment();
+                newFragment = new InicioFragment();
+                enviarFragmento = true;
+                break;
+            case R.id.nav_conocenos:
+                newFragment = new ConocenosFragment();
                 enviarFragmento = true;
                 break;
             case R.id.nav_productos:
-                newFragment = new JuegosFragment();
+                newFragment = new ProductosFragment();
                 enviarFragmento = true;
                 break;
-            case R.id.nav_carrito:
-                newFragment = new OtrosFragment();
+            case R.id.nav_servicios:
+                newFragment = new ServiciosFragment();
                 enviarFragmento = true;
                 break;
-            case R.id.nav_ordenes:
-                newFragment = new OtrosFragment();
+            case R.id.nav_menbresias:
+                newFragment = new MembresiasFragment();
                 enviarFragmento = true;
                 break;
-            case R.id.nav_facturas:
-                newFragment = new OtrosFragment();
+            case R.id.nav_contactenos:
+                newFragment = new ContactenosFragment();
                 enviarFragmento = true;
                 break;
             case R.id.nav_log_out:
-                newFragment = new OtrosFragment();
-                enviarFragmento = true;
+                Toast.makeText(getApplicationContext(),"Pronto Implementaremos esta Opcion",Toast.LENGTH_SHORT).show();
+                enviarFragmento = false;
                 break;
 
         }
@@ -144,15 +138,11 @@ public class MainActivity extends AppCompatActivity {
             this.ab.setTitle(menuItem.getTitle());
         }
 
-        /*FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.main_content, fragment)
-                .commit();*/
+
 
         drawerLayout.closeDrawers(); // Cerrar drawer
 
-        //setTitle(title); // Setear título actual
+
 
     }
 
