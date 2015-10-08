@@ -100,29 +100,37 @@ public class MainActivity extends AppCompatActivity {
         boolean enviarFragmento = false;
         Fragment newFragment = null;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        String titulo = "";
         switch (menuItem.getItemId()){
             case R.id.nav_home:
                 newFragment = new InicioFragment();
+                //titulo = "Olympo Fitness";
                 enviarFragmento = true;
                 break;
             case R.id.nav_conocenos:
                 newFragment = new ConocenosFragment();
                 enviarFragmento = true;
+                //titulo =(String) menuItem.getTitle();
                 break;
             case R.id.nav_productos:
                 newFragment = new ProductosFragment();
+                //titulo =(String) menuItem.getTitle();
                 enviarFragmento = true;
+
                 break;
             case R.id.nav_servicios:
                 newFragment = new ServiciosFragment();
+                //titulo =(String) menuItem.getTitle();
                 enviarFragmento = true;
                 break;
             case R.id.nav_menbresias:
                 newFragment = new MembresiasFragment();
+                //titulo =(String) menuItem.getTitle();
                 enviarFragmento = true;
                 break;
             case R.id.nav_contactenos:
                 newFragment = new ContactenosFragment();
+                //titulo =(String) menuItem.getTitle();
                 enviarFragmento = true;
                 break;
             case R.id.nav_log_out:

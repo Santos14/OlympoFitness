@@ -2,7 +2,10 @@
 <resources>
     <color name="window_background">#FFF5F5F5</color>
 
-    <color name="primaryColor">#346D7D</color>
+    <color name="primaryColor">#FFA726</color>
     <color name="primaryDarkColor">#1F515F</color>
     <color name="accentColor">#03A9F4</color>
+    <color name="borderColor">#FFA726</color>
+    <color name="fondo">#9932CC</color>
+
 </resources>
