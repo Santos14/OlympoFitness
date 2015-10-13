@@ -7,4 +7,5 @@
     <dimen name="logo_size">250dp</dimen>
 
     <dimen name="perfil_image_size">64dp</dimen>
+    <dimen name="card_margin">15dp</dimen>
 </resources>

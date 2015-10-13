@@ -11,4 +11,12 @@
     <string name="contactenos_item">Contactenos</string>
     <string name="log_out_item">Cerrar Sesión</string>
     <string name="configuracion_item">Configuración</string>
+    <string name="title_activity_second">SecondActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_lista_productos">Lista Productos</string>
+    <string name="girl_ipsum">asdasdasdasdasdasdssssssssssssssssssssssssssasd
+    asdasdasdasdasdasdasdasdasdasdasdasdasd
+    asdasdasdasdassssssssssssdasdasd
+    sdfdfgfgsdfffffffffffffsdfsdfsdfsdfsdfsdfsd</string>
 </resources>

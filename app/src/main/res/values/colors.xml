@@ -7,5 +7,6 @@
     <color name="accentColor">#03A9F4</color>
     <color name="borderColor">#FFA726</color>
     <color name="fondo">#9932CC</color>
+    <color name="monto">#016083</color>
 
 </resources>
