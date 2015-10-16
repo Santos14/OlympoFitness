@@ -1,6 +1,5 @@
-package com.is2.fitness;
+package com.is2.fitness.funciones.adaptador;
 
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
+import com.is2.fitness.funciones.entidad.Item;
+import com.is2.fitness.R;
+
+import java.util.ArrayList;
 
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
-    List<Item> listaitem;
+    ArrayList<Item> listaitem;
 
-    public ItemAdapter(List<Item> listaitem) {
+    public ItemAdapter(ArrayList<Item> listaitem) {
         this.listaitem = listaitem;
     }
 

@@ -1,4 +1,4 @@
-package com.is2.fitness;
+package com.is2.fitness.funciones.entidad;
 
 public class Item {
     private int foto,identificador;

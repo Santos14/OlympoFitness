@@ -24,17 +24,8 @@
         android:layout_toRightOf="@+id/imagen"
         android:layout_toEndOf="@+id/imagen"
         android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/item_simple_subtitulo"
-        android:layout_below="@+id/item_simple_titulo"
-        android:layout_alignLeft="@+id/item_simple_titulo"
-        android:layout_alignStart="@+id/item_simple_titulo" />
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="10dp" />
 
     <ImageView
         android:layout_width="wrap_content"

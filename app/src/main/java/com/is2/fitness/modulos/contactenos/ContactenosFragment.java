@@ -1,5 +1,4 @@
-package com.is2.fitness;
-
+package com.is2.fitness.modulos.contactenos;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,14 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.is2.fitness.R;
 
-public class ConocenosFragment extends Fragment{
+public class ContactenosFragment extends Fragment {
     private ImageView imagen;
     private TextView tit_vision,des_vision,tit_mision,des_mision;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_conocenos, container, false);
+        View view = inflater.inflate(R.layout.fragment_contactenos, container, false);
+
         imagen = (ImageView) view.findViewById(R.id.imagen_conocenos);
         tit_mision = (TextView) view.findViewById(R.id.mision_titulo);
         des_mision = (TextView) view.findViewById(R.id.mision_descripcion);
@@ -28,7 +28,6 @@ public class ConocenosFragment extends Fragment{
         des_mision.setText("afsdfsdfsdfsdafsadfsdfsdafffffffffffffffffffffffffffffsadfsdfsdafsdfsdsdafads");
         tit_vision.setText("VISION");
         des_vision.setText("afsdfsdfsdfsdafsadfsdfsdafffffffffffffffffffffffffffffsadfsdfsdafsdfsdsdafads");
-
         return view;
     }
 }

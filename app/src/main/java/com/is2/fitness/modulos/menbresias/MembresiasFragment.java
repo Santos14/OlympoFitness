@@ -1,4 +1,4 @@
-package com.is2.fitness;
+package com.is2.fitness.modulos.menbresias;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Arrays;
-import java.util.List;
+import com.is2.fitness.funciones.entidad.Item;
+import com.is2.fitness.funciones.adaptador.ItemAdapter;
+import com.is2.fitness.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by USUARIO on 06/10/2015.
@@ -22,10 +25,12 @@ public class MembresiasFragment extends Fragment {
         RecyclerView rv = (RecyclerView) view.findViewById(R.id.lista);
         LinearLayoutManager lim = new LinearLayoutManager(view.getContext());
         rv.setLayoutManager(lim);
-        List<Item> lista= Arrays.asList(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0),
-                new Item(R.mipmap.ic_launcher, "Titulo2", "Subtitulo2", "", 0),
-                new Item(R.mipmap.ic_launcher, "Titulo3", "Subtitulo3", "S/. 80.00", 0),
-                new Item(R.mipmap.ic_launcher, "Titulo4", "Subtitulo4", "", 0));
+        ArrayList<Item> lista= new ArrayList<Item>();
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
         ItemAdapter adapter = new ItemAdapter(lista);
         rv.setAdapter(adapter);
 

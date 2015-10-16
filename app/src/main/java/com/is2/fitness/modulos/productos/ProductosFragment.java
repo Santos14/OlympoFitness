@@ -1,22 +1,20 @@
-package com.is2.fitness;
+package com.is2.fitness.modulos.productos;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.is2.fitness.funciones.entidad.ItemSimple;
+import com.is2.fitness.funciones.adaptador.ItemSimpleAdapter;
+import com.is2.fitness.R;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,14 +27,14 @@ public class ProductosFragment extends Fragment{
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_productos, container, false);
 
-        List<ItemSimple> lista = Arrays.asList(new ItemSimple("Hola1","Como Estas 1",R.mipmap.ic_launcher,0),
-                new ItemSimple("Hola2","Subtitulo2",R.mipmap.ic_launcher,0),
-                new ItemSimple("Hola2","Subtitulo2",R.mipmap.ic_launcher,0),
-                new ItemSimple("Hola2","Subtitulo2",R.mipmap.ic_launcher,0),
-                new ItemSimple("Hola2","Subtitulo2",R.mipmap.ic_launcher,0),
-                new ItemSimple("Hola2","Subtitulo2",R.mipmap.ic_launcher,0),
-                new ItemSimple("Hola2","Subtitulo2",R.mipmap.ic_launcher,0),
-                new ItemSimple("Hola2","Subtitulo2",R.mipmap.ic_launcher,0));
+        List<ItemSimple> lista = Arrays.asList(new ItemSimple("Hola1",R.mipmap.ic_launcher,0),
+                new ItemSimple("Hola2",R.mipmap.ic_launcher,0),
+                new ItemSimple("Hola2",R.mipmap.ic_launcher,0),
+                new ItemSimple("Hola2",R.mipmap.ic_launcher,0),
+                new ItemSimple("Hola2",R.mipmap.ic_launcher,0),
+                new ItemSimple("Hola2",R.mipmap.ic_launcher,0),
+                new ItemSimple("Hola2",R.mipmap.ic_launcher,0),
+                new ItemSimple("Hola2",R.mipmap.ic_launcher,0));
         lblEtiqueta = (TextView)view.findViewById(R.id.descripcion);
         lstOpciones = (ListView)view.findViewById(R.id.lista);
 

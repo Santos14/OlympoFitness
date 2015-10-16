@@ -1,5 +1,6 @@
 package com.is2.fitness;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.is2.fitness.funciones.db.DbHelper;
+import com.is2.fitness.funciones.internet.ConnectionInternet;
+import com.is2.fitness.modulos.conocenos.ConocenosFragment;
+import com.is2.fitness.modulos.contactenos.ContactenosFragment;
+import com.is2.fitness.modulos.inicio.InicioFragment;
+import com.is2.fitness.modulos.menbresias.MembresiasFragment;
+import com.is2.fitness.modulos.productos.ProductosFragment;
+import com.is2.fitness.modulos.servicios.ServiciosFragment;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -29,24 +39,39 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        setToolbar(); // Setear Toolbar como action bar
+        ConnectionInternet conexion = new ConnectionInternet();
+       // if(conexion.hasInternetAccess(this)){
+            setContentView(R.layout.activity_main);
+            setToolbar(); // Setear Toolbar como action bar
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
+            drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            if (navigationView != null) {
+                setupDrawerContent(navigationView);
+            }
+            //drawerTitle = getResources().getString(R.string.home_item);
+            //DbHelper helper = new DbHelper(this);
+            //SQLiteDatabase db = helper.getWritableDatabase();
+            if (savedInstanceState == null) {
+
+                //selectItem(drawerTitle);
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                InicioFragment home = new InicioFragment();
+                transaction.add(R.id.main_content, home).commit();
+                drawerLayout.closeDrawers();
+            }
+
+        if(conexion.verificarConexion(this)){
+            Toast.makeText(this,"Con Conexion",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this,"Sin Conexion",Toast.LENGTH_SHORT).show();
         }
-        //drawerTitle = getResources().getString(R.string.home_item);
-        if (savedInstanceState == null) {
-            //selectItem(drawerTitle);
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            InicioFragment home = new InicioFragment();
-            transaction.add(R.id.main_content,home).commit();
-            drawerLayout.closeDrawers();
-        }
+        /*}else{
+
+            this.finish();
+        }*/
 
     }
 

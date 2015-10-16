@@ -1,4 +1,4 @@
-package com.is2.fitness;
+package com.is2.fitness.modulos.productos;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import java.util.Arrays;
-import java.util.List;
+import com.is2.fitness.R;
+import com.is2.fitness.funciones.adaptador.ItemAdapter;
+import com.is2.fitness.funciones.entidad.Item;
+
+import java.util.ArrayList;
 
 public class ListaProductos extends AppCompatActivity {
     private ActionBar ab = null;
@@ -25,10 +27,12 @@ public class ListaProductos extends AppCompatActivity {
         RecyclerView rv = (RecyclerView) findViewById(R.id.lista);
         LinearLayoutManager lim = new LinearLayoutManager(this);
         rv.setLayoutManager(lim);
-        List<Item> lista= Arrays.asList(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0),
-                new Item(R.mipmap.ic_launcher, "Titulo2", "Subtitulo2", "", 0),
-                new Item(R.mipmap.ic_launcher, "Titulo3", "Subtitulo3", "S/. 80.00", 0),
-                new Item(R.mipmap.ic_launcher, "Titulo4", "Subtitulo4", "", 0));
+        ArrayList<Item> lista= new ArrayList<Item>();
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
+        lista.add(new Item(R.mipmap.ic_launcher, "Titulo1", "Subtitulo1", "", 0));
         ItemAdapter adapter = new ItemAdapter(lista);
         rv.setAdapter(adapter);
     }

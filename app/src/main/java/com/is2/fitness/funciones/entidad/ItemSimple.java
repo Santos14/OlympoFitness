@@ -1,15 +1,14 @@
-package com.is2.fitness;
+package com.is2.fitness.funciones.entidad;
 
 /**
  * Created by USUARIO on 09/10/2015.
  */
 public class ItemSimple {
-    private String titulo,Subtitulo;
+    private String titulo;
     private int imagen,identificador;
 
-    public ItemSimple(String titulo, String subtitulo, int imagen,int identificador) {
+    public ItemSimple(String titulo, int imagen,int identificador) {
         this.titulo = titulo;
-        Subtitulo = subtitulo;
         this.imagen = imagen;
         this.identificador = identificador;
     }
@@ -20,14 +19,6 @@ public class ItemSimple {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public String getSubtitulo() {
-        return Subtitulo;
-    }
-
-    public void setSubtitulo(String subtitulo) {
-        Subtitulo = subtitulo;
     }
 
     public int getImagen() {
