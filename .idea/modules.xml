@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/OlympoDroid.iml" filepath="$PROJECT_DIR$/OlympoDroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OlympoFitness.iml" filepath="$PROJECT_DIR$/OlympoFitness.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

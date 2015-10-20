@@ -1,6 +1,8 @@
 package com.is2.fitness;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.is2.fitness.funciones.db.DbHelper;
+import com.is2.fitness.funciones.internet.AppStatus;
 import com.is2.fitness.funciones.internet.ConnectionInternet;
 import com.is2.fitness.modulos.conocenos.ConocenosFragment;
 import com.is2.fitness.modulos.contactenos.ContactenosFragment;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         ConnectionInternet conexion = new ConnectionInternet();
-       // if(conexion.hasInternetAccess(this)){
+
             setContentView(R.layout.activity_main);
             setToolbar(); // Setear Toolbar como action bar
 
@@ -50,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
             if (navigationView != null) {
                 setupDrawerContent(navigationView);
             }
-            //drawerTitle = getResources().getString(R.string.home_item);
-            //DbHelper helper = new DbHelper(this);
-            //SQLiteDatabase db = helper.getWritableDatabase();
+            
             if (savedInstanceState == null) {
 
                 //selectItem(drawerTitle);
@@ -63,15 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawers();
             }
 
-        if(conexion.verificarConexion(this)){
-            Toast.makeText(this,"Con Conexion",Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this,"Sin Conexion",Toast.LENGTH_SHORT).show();
-        }
-        /*}else{
-
-            this.finish();
-        }*/
+        new conexion(this).execute();
 
     }
 
@@ -86,6 +79,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    private class conexion extends AsyncTask<Void,Void,Boolean> {
+        Context context;
+
+        public conexion(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            if (AppStatus.getInstance(this.context).isOnline()) {
+                if(AppStatus.getInstance(this.context).hasInternetAccess()){
+                    return true;
+                }else{
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        protected void onPostExecute(Boolean estado){
+            if(estado){
+                Toast.makeText(context,"Usted esta en Linea!!!!",Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(context,"Usted no esta en linea!!!!",Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
