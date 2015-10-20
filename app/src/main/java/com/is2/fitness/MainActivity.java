@@ -1,7 +1,8 @@
 package com.is2.fitness;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,9 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.is2.fitness.funciones.db.DbHelper;
 import com.is2.fitness.funciones.internet.AppStatus;
-import com.is2.fitness.funciones.internet.ConnectionInternet;
 import com.is2.fitness.modulos.conocenos.ConocenosFragment;
 import com.is2.fitness.modulos.contactenos.ContactenosFragment;
 import com.is2.fitness.modulos.inicio.InicioFragment;
@@ -43,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ConnectionInternet conexion = new ConnectionInternet();
-
             setContentView(R.layout.activity_main);
             setToolbar(); // Setear Toolbar como action bar
 
@@ -53,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             if (navigationView != null) {
                 setupDrawerContent(navigationView);
             }
-            
+
             if (savedInstanceState == null) {
 
                 //selectItem(drawerTitle);
@@ -81,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private class conexion extends AsyncTask<Void,Void,Boolean> {
         Context context;
-
+        AlertDialog.Builder alerta = null;
         public conexion(Context context) {
             this.context = context;
         }
@@ -89,24 +86,34 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
             if (AppStatus.getInstance(this.context).isOnline()) {
-                if(AppStatus.getInstance(this.context).hasInternetAccess()){
+                if (AppStatus.getInstance(this.context).hasInternetAccess()) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             } else {
                 return false;
             }
         }
+
         protected void onPostExecute(Boolean estado){
-            if(estado){
-                Toast.makeText(context,"Usted esta en Linea!!!!",Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(context,"Usted no esta en linea!!!!",Toast.LENGTH_LONG).show();
+            if(!estado){
+                alerta = new AlertDialog.Builder(this.context);
+                alerta.setTitle("Olympo Fitness");
+                alerta.setMessage("Al parecer no cuentas con Internet, verifica tu conexion e intenta nuevamente");
+                alerta.setCancelable(false);
+                alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+                alerta.create();
+                alerta.setIcon(R.mipmap.ic_launcher);
+                alerta.show();
             }
         }
     }
-
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
