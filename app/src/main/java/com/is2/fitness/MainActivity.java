@@ -27,6 +27,8 @@ import com.is2.fitness.modulos.menbresias.MembresiasFragment;
 import com.is2.fitness.modulos.productos.ProductosFragment;
 import com.is2.fitness.modulos.servicios.ServiciosFragment;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
     /**
      * Instancia del drawer
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private String drawerTitle;
     private ActionBar ab = null;
     private ProgressDialog pDialog = null;
+    private boolean cambiarVista = false;
+    private ProgressDialog procesar = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,88 +200,48 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
-    procesoCarga();
-        if(enviarFragmento){
-            transaction.replace(R.id.main_content,newFragment).commit();
-            menuItem.setChecked(true);
-            this.ab.setTitle(menuItem.getTitle());
+        this.procesar = ProgressDialog.show(this,"Procesando","Espere unos Segundos", true,false);
+
+
+        if(cambiarVista){
+            if(enviarFragmento){
+                transaction.replace(R.id.main_content,newFragment).commit();
+                menuItem.setChecked(true);
+                this.ab.setTitle(menuItem.getTitle());
+            }
+            drawerLayout.closeDrawers(); // Cerrar drawer
         }
 
 
-
-        drawerLayout.closeDrawers(); // Cerrar drawer
-
-
-
     }
+    private class ExtraerConocenos extends AsyncTask<Void,Void,Objects[]> {
+        Context context = null;
 
-    public void procesoCarga(){
-        pDialog = new ProgressDialog(MainActivity.this);
-        pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pDialog.setMessage("Cargando...");
-        pDialog.setCancelable(true);
-        pDialog.setMax(100);
-        MiTareaAsincronaDialog t = new MiTareaAsincronaDialog();
-        t.execute();
-    }
+        public ExtraerConocenos(Context context) {
+            this.context = context;
+        }
 
-    private class MiTareaAsincronaDialog extends AsyncTask<Void, Integer, Boolean> {
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Objects[] doInBackground(Void... voids) {
+            Objects[] datos = new Objects[0];
+            if (AppStatus.getInstance(this.context).isOnline()) {
+                if (AppStatus.getInstance(this.context).hasInternetAccess()) {
 
-            for(int i=1; i<=5; i++) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                } else {
+
                 }
-                publishProgress(i*10);
+            } else {
 
-                if(isCancelled())
-                    break;
             }
 
-            return true;
+            return new Objects[0];
         }
 
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            int progreso = values[0].intValue();
+        protected void onPostExecute(Objects[] obj){
 
-            pDialog.setProgress(progreso);
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    MiTareaAsincronaDialog.this.cancel(true);
-                }
-            });
-
-            pDialog.setProgress(0);
-            pDialog.show();
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            if(result)
-            {
-                pDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Tarea finalizada!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            Toast.makeText(MainActivity.this, "Tarea cancelada!",
-                    Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }
