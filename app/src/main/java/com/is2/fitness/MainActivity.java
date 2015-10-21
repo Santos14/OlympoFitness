@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog pDialog = null;
     private boolean cambiarVista = false;
     private ProgressDialog procesar = null;
+    private Intent cambioActivity = null;
 
 
     @Override
@@ -201,8 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         this.procesar = ProgressDialog.show(this,"Procesando","Espere unos Segundos", true,false);
-
-
+        new ExtraerConocenos(this).execute();
         if(cambiarVista){
             if(enviarFragmento){
                 transaction.replace(R.id.main_content,newFragment).commit();
@@ -214,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private class ExtraerConocenos extends AsyncTask<Void,Void,Objects[]> {
+    private class ExtraerConocenos extends AsyncTask<Void,Void,Boolean> {
         Context context = null;
 
         public ExtraerConocenos(Context context) {
@@ -223,23 +224,34 @@ public class MainActivity extends AppCompatActivity {
 
 
         @Override
-        protected Objects[] doInBackground(Void... voids) {
-            Objects[] datos = new Objects[0];
+        protected Boolean doInBackground(Void... voids) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             if (AppStatus.getInstance(this.context).isOnline()) {
                 if (AppStatus.getInstance(this.context).hasInternetAccess()) {
+                        return true;
 
                 } else {
-
+                    return false;
                 }
             } else {
-
+                return false;
             }
-
-            return new Objects[0];
         }
 
-        protected void onPostExecute(Objects[] obj){
-
+        protected void onPostExecute(boolean obj){
+            if(obj){
+                if(MainActivity.this.procesar != null){
+                    MainActivity.this.procesar.dismiss();
+                }
+            }else{
+                Toast.makeText(context,"Datos no Procesados",Toast.LENGTH_LONG).show();
+                MainActivity.this.cambiarVista = true;
+            }
         }
     }
 
